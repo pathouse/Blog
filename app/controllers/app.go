@@ -1,12 +1,19 @@
 package controllers
 
-import "github.com/revel/revel"
+import (
+	"Blog/app/helpers"
+	"Blog/app/models"
+	"github.com/revel/revel"
+)
 
 type App struct {
 	*revel.Controller
 }
 
 func (c App) Index() revel.Result {
-	var h = &helpers.Helper{}
-	return c.Render(h)
+	var plink, ulink helpers.Linker
+	h := &helpers.Helper{}
+	plink = &models.Post{}
+	ulink = &models.User{}
+	return c.Render(h, plink, ulink)
 }
